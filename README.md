@@ -1,3 +1,37 @@
+To make a purchase:
+
+```graphql
+mutation makePurchase($data: PurchaseCreateInput!) {
+  createPurchase(data: $data) {
+    id
+    status
+    createdAt
+  }
+}
+```
+
+As for the values in `data`:
+```graphql
+{
+  "data": {
+    "student": null,
+    "phoneNumber": null,
+    "lineItems": {
+      "create": {
+        "product": {
+          "connect": {
+            "id": null
+          }
+        },
+        "quantity": null
+      }
+    }
+  }
+}
+```
+And add `data.receiptImage` key to point to a file.
+Finally, make sure you add `x-apollo-operation-name` header with the name of the operation (`makePurchase` in this case)
+
 # Keystone Project Starter
 
 Welcome to Keystone!
