@@ -132,6 +132,7 @@ type Product {
   name: String
   picture: CloudinaryImage_File
   description: Product_description_Document
+  stock: Int
   price: Int
 }
 
@@ -197,6 +198,7 @@ input ProductWhereInput {
   NOT: [ProductWhereInput!]
   id: IDFilter
   name: StringFilter
+  stock: IntFilter
   price: IntFilter
 }
 
@@ -214,6 +216,7 @@ input IntFilter {
 input ProductOrderByInput {
   id: OrderDirection
   name: OrderDirection
+  stock: OrderDirection
   price: OrderDirection
 }
 
@@ -221,6 +224,7 @@ input ProductUpdateInput {
   name: String
   picture: Upload
   description: JSON
+  stock: Int
   price: Int
 }
 
@@ -236,6 +240,7 @@ input ProductCreateInput {
   name: String
   picture: Upload
   description: JSON
+  stock: Int
   price: Int
 }
 

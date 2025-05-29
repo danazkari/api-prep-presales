@@ -25,6 +25,7 @@ model Product {
   name                  String     @default("")
   picture               Json?
   description           Json       @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
+  stock                 Int        @default(0)
   price                 Int
   from_LineItem_product LineItem[] @relation("LineItem_product")
 }

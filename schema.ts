@@ -17,7 +17,6 @@ import {
   password,
   timestamp,
   select,
-  image,
   integer,
   checkbox,
 } from '@keystone-6/core/fields'
@@ -109,6 +108,10 @@ export const lists = {
         formatting: true,
         links: true,
         dividers: true,
+      }),
+      stock: integer({
+        validation: {isRequired: true},
+        defaultValue: 0
       }),
       price: integer({validation: {isRequired: true}})
     }
