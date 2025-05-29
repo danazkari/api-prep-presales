@@ -27,7 +27,7 @@ export default withAuth(
   config({
     server: {
       cors: {
-        origin: ['http://localhost:3000', 'https://prep-presales.surge.sh'],
+        origin: ['http://localhost:3000', 'https://prep-presales.surge.sh', 'http://localhost:5173'],
         credentials: true
       }
     },

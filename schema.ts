@@ -5,7 +5,7 @@
 // If you want to learn more about how lists are configured, please read
 // - https://keystonejs.com/docs/config/lists
 
-import { list } from '@keystone-6/core'
+import { graphql, list } from '@keystone-6/core'
 import { allowAll } from '@keystone-6/core/access'
 import { cloudinaryImage } from '@keystone-6/cloudinary'
 
@@ -19,6 +19,7 @@ import {
   select,
   integer,
   checkbox,
+  virtual,
 } from '@keystone-6/core/fields'
 
 // the document field is a more complicated field, so it has it's own package
@@ -28,6 +29,7 @@ import { document } from '@keystone-6/fields-document'
 // when using Typescript, you can refine your types to a stricter subset by importing
 // the generated types from '.keystone/types'
 import { type Lists } from '.keystone/types'
+import { Empty } from '@keystone-6/core/dist/declarations/src/types/schema/graphql-ts-schema'
 
 
 type Session = {
@@ -113,6 +115,24 @@ export const lists = {
         validation: {isRequired: true},
         defaultValue: 0
       }),
+      remainingStock: virtual({
+        field: graphql.field({
+          type: graphql.Int,
+          async resolve(item, args, context) {
+            const purchases = await context.query.LineItem.findMany({
+              where: {
+                product: {
+                  id: {
+                    equals: item.id
+                  }
+                }
+              },
+              query: 'quantity'
+            })
+            return item.stock - purchases.reduce((accumulator, item) => accumulator + item.quantity, 0)
+          }
+        })
+      }),
       price: integer({validation: {isRequired: true}})
     }
 
@@ -128,7 +148,7 @@ export const lists = {
       }
     },
     ui: {
-      isHidden: true,
+      isHidden: false,
     },
     fields: {
       product: relationship({
