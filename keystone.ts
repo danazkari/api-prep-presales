@@ -16,6 +16,7 @@ import { lists } from './schema'
 // when you write your list-level access control functions, as they typically rely on session data
 import { withAuth, session } from './auth'
 
+
 const {
   DB_URL,
   DB_USERNAME,
@@ -24,6 +25,12 @@ const {
 
 export default withAuth(
   config({
+    server: {
+      cors: {
+        origin: ['http://localhost:3000', 'https://prep-presales.surge.sh'],
+        credentials: true
+      }
+    },
     db: {
       // we're using sqlite for the fastest startup experience
       //   for more information on what database might be appropriate for you
