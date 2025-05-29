@@ -173,6 +173,7 @@ export const lists = {
     fields: {
       student: text({validation: {isRequired: true}}),
       phoneNumber: text({validation: {isRequired: true}}),
+      section: text({validation: {isRequired: false}}),
       receiptImage: cloudinaryImage({
         cloudinary: {
           cloudName: process.env.CLOUDINARY_CLOUD_NAME || 'test',

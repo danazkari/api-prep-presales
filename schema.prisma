@@ -46,6 +46,7 @@ model Purchase {
   id           String     @id @default(cuid())
   student      String     @default("")
   phoneNumber  String     @default("")
+  section      String     @default("")
   receiptImage Json?
   lineItems    LineItem[] @relation("LineItem_purchase")
   status       String?    @default("pending")

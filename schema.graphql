@@ -314,6 +314,7 @@ type Purchase {
   id: ID!
   student: String
   phoneNumber: String
+  section: String
   receiptImage: CloudinaryImage_File
   lineItems(where: LineItemWhereInput! = {}, orderBy: [LineItemOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: LineItemWhereUniqueInput): [LineItem!]
   lineItemsCount(where: LineItemWhereInput! = {}): Int
@@ -334,6 +335,7 @@ input PurchaseWhereInput {
   id: IDFilter
   student: StringFilter
   phoneNumber: StringFilter
+  section: StringFilter
   lineItems: LineItemManyRelationFilter
   status: StringNullableFilter
   notes: StringFilter
@@ -366,6 +368,7 @@ input PurchaseOrderByInput {
   id: OrderDirection
   student: OrderDirection
   phoneNumber: OrderDirection
+  section: OrderDirection
   status: OrderDirection
   notes: OrderDirection
   createdAt: OrderDirection
@@ -375,6 +378,7 @@ input PurchaseOrderByInput {
 input PurchaseUpdateInput {
   student: String
   phoneNumber: String
+  section: String
   receiptImage: Upload
   lineItems: LineItemRelateToManyForUpdateInput
   status: String
@@ -398,6 +402,7 @@ input PurchaseUpdateArgs {
 input PurchaseCreateInput {
   student: String
   phoneNumber: String
+  section: String
   receiptImage: Upload
   lineItems: LineItemRelateToManyForCreateInput
   status: String
