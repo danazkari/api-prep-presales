@@ -141,7 +141,7 @@ export const lists = {
   LineItem: list({
     access: {
       operation: {
-        query: isAdmin,
+        query: allowAll,
         create: allowAll,
         update: isAdmin,
         delete: isAdmin,
@@ -164,7 +164,7 @@ export const lists = {
   Purchase: list({
     access: {
       operation: {
-        query: isAdmin,
+        query: allowAll,
         create: allowAll,
         update: isAdmin,
         delete: isAdmin,
