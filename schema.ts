@@ -115,10 +115,47 @@ export const lists = {
         validation: {isRequired: true},
         defaultValue: 0
       }),
+      earnings: virtual({
+        field: graphql.field({
+          type: graphql.Int,
+          async resolve(item, _, context) {
+            const purchases = await context.query.LineItem.findMany({
+              where: {
+                product: {
+                  id: {
+                    equals: item.id
+                  }
+                }
+              },
+              query: 'quantity product { price }'
+            })
+            return purchases.reduce((accumulator, item) => accumulator + (item.quantity * item.product.price), 0)
+          }
+        })
+      }),
+
+      sold: virtual({
+        field: graphql.field({
+          type: graphql.Int,
+          async resolve(item, _, context) {
+            const purchases = await context.query.LineItem.findMany({
+              where: {
+                product: {
+                  id: {
+                    equals: item.id
+                  }
+                }
+              },
+              query: 'quantity'
+            })
+            return purchases.reduce((accumulator, item) => accumulator + item.quantity, 0)
+          }
+        })
+      }),
       remainingStock: virtual({
         field: graphql.field({
           type: graphql.Int,
-          async resolve(item, args, context) {
+          async resolve(item, _, context) {
             const purchases = await context.query.LineItem.findMany({
               where: {
                 product: {

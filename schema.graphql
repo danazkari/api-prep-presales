@@ -133,6 +133,8 @@ type Product {
   picture: CloudinaryImage_File
   description: Product_description_Document
   stock: Int
+  earnings: Int
+  sold: Int
   remainingStock: Int
   price: Int
 }
